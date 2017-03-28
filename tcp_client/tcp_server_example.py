@@ -1,5 +1,5 @@
 import socket
-
+import struct
 import datetime
 
 if __name__ == '__main__':
@@ -14,11 +14,15 @@ if __name__ == '__main__':
         connection, client_address = sock.accept()
         try:
             print 'connection from', client_address
-
+            connection.sendall(struct.pack('>d', 0))
             # Receive the data in small chunks and retransmit it
             while True:
                 data = connection.recv(1024)
-                print 'received "%s", timestamp: %s' % (data, datetime.datetime.now())
+                try:
+                    real_data = struct.unpack(">d", data)
+                except struct.error:
+                    real_data = (data,)
+                print 'received "%s", timestamp: %s' % (real_data[0], datetime.datetime.now())
                 if data:
                     print 'sending data back to the client'
                     connection.sendall(data)

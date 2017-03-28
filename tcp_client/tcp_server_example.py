@@ -15,9 +15,11 @@ if __name__ == '__main__':
         try:
             print 'connection from', client_address
             connection.sendall(struct.pack('>d', 0))
+            packet_number = 0
             # Receive the data in small chunks and retransmit it
             while True:
                 data = connection.recv(1024)
+                packet_number += 1
                 try:
                     real_data = struct.unpack(">d", data)
                 except struct.error:
@@ -27,7 +29,9 @@ if __name__ == '__main__':
                     print 'sending data back to the client'
                     connection.sendall(data)
                 else:
-                    print 'no more data from', client_address
+                    print 'No more data from %s:%d, overall packets transmitted: %d ' % (client_address[0],
+                                                                                         client_address[1],
+                                                                                         packet_number)
                     break
         except KeyboardInterrupt:
             print "Got Ctrl+C, closing..."

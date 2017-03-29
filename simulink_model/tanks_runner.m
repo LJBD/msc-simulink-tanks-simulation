@@ -7,14 +7,14 @@ w = 5;
 h_max = 40;
 
 % Starting point
-h10 = 0;
-h20 = 0;
-h30 = 0;
+h10 = 3;
+h20 = 0.10;
+h30 = 30;
 
 % Simulation time
-T = 10;
+T = 40;
 
 % Outflow constats -> TODO: get them from experiments
-C1 = 1;
-C2 = 1;
-C3 = 1;
+C1 = 10;
+C2 = 10;
+C3 = 10;

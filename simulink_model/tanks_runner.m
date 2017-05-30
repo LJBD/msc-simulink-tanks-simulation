@@ -5,17 +5,17 @@ c = 10;
 R = 40;
 w = 5;
 h_max = 40;
-u_max = 50;
+u_max = 200;
 
 % Starting point
-h10 = 13;
-h20 = 13;
-h30 = 7;
+h10 = 10;
+h20 = 10;
+h30 = 10;
 
 % Simulation time
 T = 40;
 
 % Outflow constats -> TODO: get them from experiments
-C1 = 20;
-C2 = 20;
-C3 = 20;
+C1 = 25;
+C2 = 25;
+C3 = 25;

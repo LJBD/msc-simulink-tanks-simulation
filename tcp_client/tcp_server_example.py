@@ -3,7 +3,7 @@ import struct
 import datetime
 
 if __name__ == '__main__':
-    server_address = 'localhost'
+    server_address = '0.0.0.0'
     server_port = 4567
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.bind((server_address, server_port))

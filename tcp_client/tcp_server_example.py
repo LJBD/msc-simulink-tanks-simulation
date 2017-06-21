@@ -1,6 +1,7 @@
+from __future__ import print_function
 import socket
 import struct
-import datetime
+from datetime import datetime
 
 if __name__ == '__main__':
     server_address = '0.0.0.0'
@@ -10,10 +11,10 @@ if __name__ == '__main__':
     sock.listen(1)
     while True:
         # Wait for a connection
-        print 'waiting for a connection'
+        print('waiting for a connection')
         connection, client_address = sock.accept()
         try:
-            print 'connection from', client_address
+            print('connection from', client_address)
             connection.sendall(struct.pack('>d', 0))
             packet_number = 0
             # Receive the data in small chunks and retransmit it
@@ -24,19 +25,21 @@ if __name__ == '__main__':
                     real_data = struct.unpack(">d", data)
                 except struct.error:
                     real_data = (data,)
-                print 'received "%s", timestamp: %s' % (real_data[0], datetime.datetime.now())
+                print('received "%s", timestamp: %s' % (real_data[0],
+                                                        datetime.now()))
                 if data:
-                    print 'sending data back to the client'
+                    print ('sending data back to the client')
                     connection.sendall(data)
                 else:
-                    print 'No more data from %s:%d, overall packets transmitted: %d ' % (client_address[0],
-                                                                                         client_address[1],
-                                                                                         packet_number)
+                    print('No more data from %s:%d, overall packets'
+                          'transmitted: %d ' % (client_address[0],
+                                                client_address[1],
+                                                packet_number))
                     break
         except KeyboardInterrupt:
-            print "Got Ctrl+C, closing..."
+            print("Got Ctrl+C, closing...")
             connection.close()
-            print "Connection closed"
+            print("Connection closed")
         finally:
             # Clean up the connection
             connection.close()

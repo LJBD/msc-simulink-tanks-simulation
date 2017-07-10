@@ -13,7 +13,7 @@ h20 = 20;
 h30 = 20;
 
 % Simulation time
-T = 150;
+T = 200;
 
 % Outflow constats -> TODO: get them from experiments
 C1 = 16;

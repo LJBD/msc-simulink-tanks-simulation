@@ -27,6 +27,8 @@ def load_matlab_data(
                 print("Got a new optimisation end at %f" % time[last_index - 1])
                 calculate_error(h1[last_index - 1], h2[last_index - 1],
                                 h3[last_index - 1])
+            if time[last_index] > 168.743:
+                break
     return time, h1, h2, h3, ctrl
 
 
@@ -71,7 +73,8 @@ def plot_things(time, h1, h2, h3, control):
 
 
 def main():
-    time, h1, h2, h3, ctrl = load_matlab_data()
+    time, h1, h2, h3, ctrl = load_matlab_data(
+        mat_file="../simulink_model/from_ext_ctrl_lqr_went_wild.mat")
     plot_things(time, h1, h2, h3, ctrl)
 
 

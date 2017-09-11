@@ -27,8 +27,13 @@ def load_matlab_data(
                 print("Got a new optimisation end at %f" % time[last_index - 1])
                 calculate_error(h1[last_index - 1], h2[last_index - 1],
                                 h3[last_index - 1])
-            if time[last_index] > 168.743:
-                break
+            elif ctrl[last_index] in (0.0, 100.0) and ctrl[last_index - 1] \
+                    not in (0.0, 100.0):
+                print("Got new optimisation start at %f" % time[last_index])
+                print("(%f, %f, %f)" % (h1[last_index], h2[last_index],
+                                        h3[last_index]))
+            # if time[last_index] > 168.743:
+            #     break
     return time, h1, h2, h3, ctrl
 
 
